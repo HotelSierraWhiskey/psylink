@@ -3,6 +3,13 @@ import tomllib
 import socket
 import logging
 import colorlog
+import random
+
+
+def get_uid():
+    num = random.randint(0, 4294967295)
+    uid = format(num, '08X')
+    return uid
 
 
 def get_config():
@@ -11,6 +18,7 @@ def get_config():
             config = tomllib.load(file)
             hostname = socket.gethostname()
             ip = socket.gethostbyname(hostname)
+            config['properties']['worker_id'] = get_uid()
             config['connection'] = {'hostname': hostname, 'ip': ip}
             return dotmap.DotMap(config)
     except tomllib.TOMLDecodeError as e:
@@ -18,6 +26,8 @@ def get_config():
     except FileNotFoundError:
         print("Couldn't locate config.toml")
 
+
+config = get_config()
 
 logger = logging.getLogger("psylink")
 logger.setLevel(logging.DEBUG)
