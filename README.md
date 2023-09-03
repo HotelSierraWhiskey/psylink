@@ -1,5 +1,8 @@
 # Psylink
 
+A backend and minimal protocol for distributing local LLM prompts.
+Built using Llama CPP for python, and redis.
+
 ### Psylink Message Format
 
 Client message format:
