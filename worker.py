@@ -1,10 +1,9 @@
-from config import get_config, logger
+from config import config, logger
 from db import get_db
 from llm import get_llm
 import json
 
 
-config = get_config()
 db = get_db()
 llm = get_llm()
 
@@ -27,7 +26,7 @@ def worker_task():
 
     logger.info(f"Done. {output}")
 
-    payload = json.dumps({'id': id, 'hostname': config.connection.hostname,
+    payload = json.dumps({'message_id': id, 'worker_id': config.properties.worker_id,
                           'input': prompt, 'output': output})
 
     db.lpush(config.redis.output_queue, payload)
