@@ -5,22 +5,32 @@ Built using Llama CPP for python, and redis.
 
 ### Psylink Message Format
 
-Client message format:
+Client input queue message format:
 
 ```python
 {
-    "id": str,
+    "message_id": str,
     "priority": int,
     "input": str
 }
 ```
 
-Worker response format:
+Client command queue message format:
 
 ```python
 {
-    "id": str,
-    "hostname": str,
+    "message_id": str,
+    "worker_id": str,
+    "command": str
+}
+```
+
+Worker output queue message format:
+
+```python
+{
+    "message_id": str,
+    "worker_id": str,
     "input": str,
     "output": str
 }
