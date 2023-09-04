@@ -21,7 +21,10 @@ Client command queue message format:
 {
     "message_id": str,
     "worker_id": str,
-    "command": str
+    "input": {
+        "command": str,
+        "args": dict | None
+    }
 }
 ```
 
