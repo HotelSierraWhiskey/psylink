@@ -47,8 +47,10 @@ host = "localhost"
 port = 6379
 password = "supersecretpassword"
 db = 0
-input_queue = "psy_input_queue"
-output_queue = "psy_output_queue"
+prompt_input_queue = "psy_prompt_input_queue"
+prompt_output_queue = "psy_prompt_output_queue"
+command_input_queue = "psy_command_input_queue"
+command_output_queue = "psy_command_output_queue"
 
 [model]
 model_path = "models/codellama-13b-instruct.Q8_0.gguf"
