@@ -1,7 +1,27 @@
 # Psylink
 
 A backend and minimal protocol for distributing local LLM prompts.
-Built using Llama CPP for python, and redis.
+Built using Llama CPP for Python, and Redis.
+
+```r
+Client -------\                           /--------- Psylink Worker
+               \                         /
+Client ---------- Redis Message Queues ------------- Psylink Worker
+               /                         \
+Client -------/                           \--------- Psylink Worker
+```
+
+### Requirements
+
+- Python >= 3.11
+- A Redis server
+- A Llama CPP-compatible LLM model
+
+Create a virtual environment and run 
+
+`pip install -r requirements.txt`
+
+to install the required python packages.
 
 ### Psylink Message Format
 
