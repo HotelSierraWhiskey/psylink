@@ -30,6 +30,7 @@ Client input queue message format:
 ```python
 {
     "message_id": str,
+    "client_id": str,
     "priority": int,
     "input": str
 }
@@ -40,6 +41,7 @@ Client command queue message format:
 ```python
 {
     "message_id": str,
+    "client_id": str,
     "worker_id": str,
     "input": {
         "command": str,
@@ -53,6 +55,7 @@ Worker output queue message format:
 ```python
 {
     "message_id": str,
+    "client_id": str,
     "worker_id": str,
     "input": str,
     "output": str
