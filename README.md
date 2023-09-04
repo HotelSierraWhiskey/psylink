@@ -4,11 +4,11 @@ A backend and minimal protocol for distributing local LLM prompts.
 Built using Llama CPP for Python, and Redis.
 
 ```
-Client -------\                           /--------- Psylink Worker
+Client -------\                           /------- Psylink Worker
                \                         /
-Client ---------- Redis Message Queues ------------- Psylink Worker
+Client ---------- Redis Message Queues ----------- Psylink Worker
                /                         \
-Client -------/                           \--------- Psylink Worker
+Client -------/                           \------- Psylink Worker
 ```
 
 ### Requirements
