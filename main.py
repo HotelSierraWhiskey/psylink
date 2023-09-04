@@ -8,8 +8,7 @@ if __name__ == '__main__':
     logger.info(
         f"Running on {config.connection.hostname} ({config.connection.ip})")
 
-    while True:
-        try:
-            worker_task()
-        except KeyboardInterrupt:
-            quit()
+    try:
+        worker_task()
+    except KeyboardInterrupt:
+        quit()
