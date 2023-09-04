@@ -16,6 +16,7 @@ def prompt_event_listener():
         json_data = json.loads(input_data.decode('utf-8').replace("'", '"'))
 
         message_id = json_data['message_id']
+        client_id = json_data['client_id']
         priority = json_data['priority']
         prompt = json_data['input']
 
@@ -29,8 +30,11 @@ def prompt_event_listener():
 
         logger.info(f"Done. {output}")
 
-        payload = json.dumps({'message_id': message_id, 'worker_id': config.properties.worker_id,
-                              'input': prompt, 'output': output})
+        payload = json.dumps({'message_id': message_id,
+                              'client_id': client_id,
+                              'worker_id': config.properties.worker_id,
+                              'input': prompt,
+                              'output': output})
 
         db.lpush(config.redis.prompt_output_queue, payload)
 
