@@ -3,7 +3,7 @@
 A backend and minimal protocol for distributing local LLM prompts.
 Built using Llama CPP for Python, and Redis.
 
-```r
+```
 Client -------\                           /--------- Psylink Worker
                \                         /
 Client ---------- Redis Message Queues ------------- Psylink Worker
