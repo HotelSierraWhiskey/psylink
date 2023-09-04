@@ -12,7 +12,10 @@ def get_uid():
     return uid
 
 
-def get_config():
+def get_config(config=None):
+    if config:
+        return dotmap.DotMap(config)
+
     try:
         with open('config.toml', mode='rb') as file:
             config = tomllib.load(file)
