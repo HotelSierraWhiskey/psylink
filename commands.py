@@ -1,5 +1,6 @@
 from config import config, get_config, logger
 from db import get_db
+import time
 import json
 
 
@@ -12,6 +13,7 @@ def handle_command(message):
     args = message['input']['args']
 
     payload = message
+    payload['timestamp'] = time.time()
 
     if command == 'ping':
         payload["output"] = "pong"
