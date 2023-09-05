@@ -1,0 +1,42 @@
+version: "3.5"
+
+volumes:
+  redis_data:
+
+networks:
+  psylink:
+    external: true
+
+services:
+  redis:
+    image: 'redis/redis-stack:6.2.6-v7'
+    networks:
+      psylink:
+    volumes:
+      - redis_data:/data
+
+  psylink:
+    image: psylink
+    networks:
+      - psylink
+    environment:
+      - REDIS_OM_URL=redis://@redis:6379
+    volumes: 
+      - ./src:/app/src # copy entire app into container
+    depends_on:
+      - redis
+
+  psylink_worker:
+    image: psylink
+    networks:
+      - psylink
+    deploy:
+      - replicas: 5
+    environment:
+      - REDIS_OM_URL=redis://@redis:6379
+    volumes: 
+      - ./src:/app/src # copy entire app into container
+    depends_on:
+      - redis
+    entrypoint: python src/worker.py
+  
