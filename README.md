@@ -4,11 +4,36 @@ A backend and minimal protocol for distributing local LLM prompts.
 Built using Llama CPP for Python, and Redis.
 
 ```
-Client -------\                           /------- Psylink Worker
-               \                         /
-Client ---------- Redis Message Queues ----------- Psylink Worker
-               /                         \
-Client -------/                           \------- Psylink Worker
+┌────────┐                                                 ┌────────────────┐
+│ Client ├──────┐                                    ┌─────┤ Psylink Worker │
+└────────┘      │  ┌──────────────────────────────┐  │     └────────────────┘
+                └──┤                              ├──┘
+┌────────┐         │ Redis Message Broker Server  │        ┌────────────────┐
+│ Client ├─────────┤                              ├────────┤ Psylink Worker │
+└────────┘         ├──────────────────────────────┤        └────────────────┘
+                   │                              │
+┌────────┐         │ Prompt Input/ Output Queues  │        ┌────────────────┐
+│ Client ├─────────┤                              ├────────┤ Psylink Worker │
+└────────┘         │ Command Input/ Output Queues │        └────────────────┘
+               ┌───┤                              ├──┐
+┌────────┐     │   └──────────────────────────────┘  │     ┌────────────────┐
+│ Client ├─────┘                                     └─────┤ Psylink Worker │
+└────────┘                                                 └────────────────┘
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            ┼
 ```
 
 ### Requirements
@@ -32,7 +57,8 @@ Client input queue message format:
     "message_id": str,
     "client_id": str,
     "priority": int,
-    "input": str
+    "input": str,
+    "timestamp": int
 }
 ```
 
@@ -46,7 +72,8 @@ Client command queue message format:
     "input": {
         "command": str,
         "args": dict | None
-    }
+    },
+    "timestamp": int
 }
 ```
 
@@ -58,7 +85,8 @@ Worker output queue message format:
     "client_id": str,
     "worker_id": str,
     "input": str,
-    "output": str
+    "output": str,
+    "timestamp": int
 }
 ```
 
