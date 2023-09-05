@@ -19,21 +19,6 @@ Built using Llama CPP for Python, and Redis.
 ┌────────┐     │   └──────────────────────────────┘  │     ┌────────────────┐
 │ Client ├─────┘                                     └─────┤ Psylink Worker │
 └────────┘                                                 └────────────────┘
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            ┼
 ```
 
 ### Requirements
